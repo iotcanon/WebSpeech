@@ -50,7 +50,7 @@
             document.getElementById('speakButton').addEventListener('click', () => {
                 speechSynthesis.speak(utterance);
             });
-            speechSynthesis.speak(utterance);
+            setTimeout(speechSynthesis.speak(utterance), 500);
         }
     </script>
 </body>
