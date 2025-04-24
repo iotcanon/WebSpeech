@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>音声合成</title>
+</head>
+<body>
+    <button id="speakButton">もう一度</button>
+
+    <script>
+        // 数字と平仮名のマッピング
+        const hiraganaMap = {
+            '0': 'ぜろ',
+            '1': 'いち',
+            '2': 'に',
+            '3': 'さん',
+            '4': 'よん',
+            '5': 'ご',
+            '6': 'ろく',
+            '7': 'なな',
+            '8': 'はち',
+            '9': 'きゅう'
+        };
+
+        function convertToHiragana(numStr) {
+            // 数値文字列を平仮名に変換
+            let result = '';
+            for (let char of numStr) {
+                if (hiraganaMap[char]) {
+                    result += hiraganaMap[char];
+                } else {
+                    // 数字以外の文字が含まれている場合はそのまま追加
+                    result += char;
+                }
+            }
+            return result;
+        }
+
+        window.onload = function() {
+            // URLからメッセージを取得
+            const urlParams = new URLSearchParams(window.location.search);
+            var jan = urlParams.get('jan') || '未設定';
+            jan = convertToHiragana(jan);
+            const sz = urlParams.get('size') || '未設定';
+            const clr = urlParams.get('color') || '未設定';
+            const message = 'ジャンコードは、' + jan + '。サイズは、' + sz + '。色は、' + clr;
+            const utterance = new SpeechSynthesisUtterance(message);
+
+            // ボタンがクリックされたときの処理
+            document.getElementById('speakButton').addEventListener('click', () => {
+                speechSynthesis.speak(utterance);
+            });
+            speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
