@@ -40,7 +40,7 @@
             // URLからメッセージを取得
             const urlParams = new URLSearchParams(window.location.search);
             var jan = urlParams.get('jan') || '未設定';
-            jan = convertToHiragana(jan).slice(-5);
+            jan = convertToHiragana(jan.slice(-5));
             const sz = urlParams.get('size') || '未設定';
             const clr = urlParams.get('color') || '未設定';
             const message = 'ジャンコードは、' + jan + '。サイズは、' + sz + '。色は、' + clr;
